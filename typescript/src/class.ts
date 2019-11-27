@@ -1,26 +1,26 @@
-class Dog {
-  constructor(name: string) {
-    this.name = name
-  }
-  public name: string // 属性需要在构造函数内赋值，
-  //   name?: string // 要么改成可选属性
-  run() {}
-}
+// class Dog {
+//   constructor(name: string) {
+//     this.name = name
+//   }
+//   public name: string // 属性需要在构造函数内赋值，
+//   //   name?: string // 要么改成可选属性
+//   run() {}
+// }
 
 // 属性是实例属性，不是原型属性，要实例化之后才有name
-console.log(Dog.prototype)
+// console.log(Dog.prototype)
 
-let dog = new Dog('mini')
-console.log(dog) // 这个时候就有name了
+// let dog = new Dog('mini')
+// console.log(dog) // 这个时候就有name了
 
 // 类的继承
-class Husky extends Dog {
-  constructor(name: string, color: string) {
-    super(name)
-    this.color = color
-  }
-  color: string
-}
+// class Husky extends Dog {
+//   constructor(name: string, color: string) {
+//     super(name)
+//     this.color = color
+//   }
+//   color: string
+// }
 
 // 类的修饰符
 // public 什么都可以访问
@@ -56,3 +56,33 @@ class Posscat extends Cat {
 }
 let cat2 = new Posscat('黑咪', true)
 console.log('cat2', cat2, Posscat)
+
+// 抽象类的定义
+abstract class Animal {
+  eat() {}
+  abstract sleep(): void // 抽象方法
+}
+// let animal1 = new Animal() // 抽象类无法直接创建实例
+
+class Dog extends Animal {
+  constructor(name: string) {
+    super()
+    this.name = name
+  }
+  name: string
+  sleep() {
+    console.log('Dog sleep')
+  }
+}
+let dog = new Dog('Doge')
+class Mouse extends Animal {
+  constructor(name: string) {
+    super()
+    this.name = name
+  }
+  name: string
+  sleep() {
+    console.log('Mouse sleep')
+  }
+}
+let mouse = new Mouse('Jerry')
