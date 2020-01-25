@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #console {
+        width: 600px;
+        height: 400px;
+        background: #ccc;
+        overflow: auto;
+      }
+      .btns {
+      }
+    </style>
+  </head>
+  <body>
+    <div id="console"></div>
+    <ul class="btns">
+      <li><button data="scissor">剪刀</button></li>
+      <li><button data="rock">石头</button></li>
+      <li><button data="paper">布</button></li>
+    </ul>
+  </body>
+  <script>
+    const action = (userAct) => fetch('/game?action=' + userAct)
+    const consoleEl = document.getElementById('console')
+    const btns = document.querySelector('.btns')
+
+    btns.addEventListener('click', function() {
+      let target = event.target
+      while (target.tagName.toLowerCase() != 'button') {
+        target = target.childNodes[0]
+      }
+      action(target.getAttribute('data'))
+        .then(function(res) {
+          return res.text()
+        })
+        .then((text) => {
+          consoleEl.innerHTML += text + '<br/>'
+        })
+    })
+  </script>
+</html>
